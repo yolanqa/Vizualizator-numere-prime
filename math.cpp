@@ -43,16 +43,19 @@ void drawGrid(vector<bool> math, int n, int eliminat){
     for(int i=2; i<=n;i++){
         if (i==eliminat){
             cout<<"\033[33m"<<i<<"\033[0m";
+            //galben e numarul eliminat in momentul animatiei
 
         }
 
         else if (math[i]==true){
-            cout<<"\033[31m"<<i<<"\033[0m";
+            cout<<"\033[36m"<<i<<"\033[0m";
+            //cyan e nr prim si ramane in vector
 
         }
 
         else if (math[i]==false){
-            cout<<"\033[36m"<<i<<"\033[0m";
+            cout<<"\033[31m"<<i<<"\033[0m";
+            //rosu e numar compus taiat
 
         }
 
@@ -67,8 +70,26 @@ void drawGrid(vector<bool> math, int n, int eliminat){
 
 //implementare main
 int main(){
+    int n;
     cin>>n;
 
-    vector<bool> 
+    vector<bool> m=math(n);
 
+    clearScreen();
+    drawGrid(m, n, -1);
+
+
+    for(int i=2;i<=sqrt(n);i++){
+        if(m[i]==true){
+            for( int multiplu=i*i; multiplu<=n; multiplu+=i){
+                m[multiplu]=false;
+                clearScreen();
+                drawGrid(m,n,multiplu);
+                sleepMilisec(80);
+        }
+    }
+
+
+    }
+    return 0;
 }
